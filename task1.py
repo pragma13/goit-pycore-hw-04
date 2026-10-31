@@ -1,7 +1,6 @@
-#returns total and avarage salaries calculated from file data
+#returns total and average salaries calculated from file data
 def total_salary(path):
 
-    
     try:
         with open(path, "r", encoding="utf-8") as f:
             line_count = 0
@@ -9,29 +8,23 @@ def total_salary(path):
             current_line_number = 0
 
             for line in f:
+                current_line_number += 1
 
                 if not line.strip():
-                    current_line_numb += 1
                     continue
                 
                 try:
-                    current_line_numb += 1
-                    _, salary =  line.split(",")
+                    _, salary = line.split(",")
                     total_salary_amount += int(salary)
                     line_count += 1
                 except ValueError:
-                    print(f"line {line_count} is corrupted, not included in calculation")
-
-                
+                    print(f"line {current_line_number} is corrupted, not included in calculation")
 
             if line_count == 0:
                 print("file is either empty or data is corrupted")
                 return 0, 0
 
             return total_salary_amount, total_salary_amount / line_count
-             
-
-
 
     except FileNotFoundError:
         print(f"file {path} is not found")
